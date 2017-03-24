@@ -47,18 +47,28 @@
 					<section data-background="css/images/base.png">
 						<h2>Our development process</h2>
 						<ul>
-							<li>Both in D7 and in D8 in our CI process, we install the whole project on every deployment.</li>
+							<li>Install the project as our development workflow</li>
 							<li class="fragment">For that reason, we can't back up in a DB for content.</li>
 							<li class="fragment">But we need content for testing and QA</li>
 						</ul>
+						<aside class="notes">
+							<p>Both in D7 and in D8 in our CI process, we install the whole project on every deployment</p>
+							<p>For QA we need content on different scenarios: with all fields with content, other withous images and so on.</p>
+						</aside>
 					</section>
 					<section data-background="css/images/base.png">
 						<h2>Installed site with no content</h2>
 						<img src="images/site-without-content.png" />
+						<aside class="notes">
+							<p>A typical site after installation without content</p>
+						</aside>
 					</section>
 					<section data-background="css/images/base.png">
 						<h2>Installed site with content</h2>
 						<img src="images/site-with-content.png" />
+						<aside class="notes">
+							<p>And this is after migrate default content adds dummy content</p>
+						</aside>
 					</section>
 				</section>
 				<section>
@@ -76,6 +86,10 @@
 							<li class="fragment">Easy to remove content<br/>
 							<code>drush migrate-rollback &lt;content&gt;</code></li>
 						</ul>
+						<aside class="notes">
+							<p>As a developer, we are always in our IDE and in our terminal.</p>
+							<p>We can use drush as a resource</p>
+						</aside>
 					</section>
 					<section data-background="css/images/base.png">
 						<h2>Easy to maintain</h2>
@@ -84,6 +98,10 @@
 							<li>A new use case for a content is a new line in our text file</li>
 							<li>New content for a new entity is a new file</li>
 						</ul>
+						<aside class="notes">
+							<p>We need a module that can rely on text files without the need to interact with the UI</p>
+							<p>We can commit our dummy content and versioning it</p>
+						</aside>
 					</section>
 				</section>
 				<section>
