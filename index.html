@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Enhance your testing experience with the Migrate Default Content module</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/drupaldevdays.css">
@@ -25,38 +25,176 @@
 		<div class="reveal">
 			<div class="slides">
 				<section data-background="css/images/cover.png">
-					<h1>SESSION TITLE</h1>
+					<h1>Enhance your testing experience with the Migrate Default Content module</h1>
 					<p>
-						<small><a href="#">SPEAKER NAME 1 </a> ♦ <a href="#">SPEAKER NAME 2</a></small>
+						<small><a href="http://drupal.org/u/rvilar">Ramon Vilar - rvilar</a></small>
 					</p>
 				</section>
-
 				<section data-background="css/images/base.png">
-					<h2>SLIDE TITLE</h2>
-					<ul>
-						<li>
-							Item list list 1
-							<ul>
-								<li>
-									Item list level 2
-								</li>
-							</ul>
-						</li>
-						<li>
-							Item list level 1
-						</li>
-					</ul>
+					<h2>About me</h2>
+					<p>Ramon Vilar - <a href="http://drupal.org/u/rvilar">rvilar</a></p>
+					<p><small>CEO &amp; Drupal developer</small></p>
+					<p><img src="images/logo.png" style="width:60%" /></p>
+					<aside class="notes">
+						<p>I'm transitioning from the developer world to the management world</p>
+					</aside>
+				</section>
+				<section>
+					<section class="has-dark-background section-slide" data-background="css/images/section.png" >
+						<h2>The origins</h2>
+						<small>Why we need this?</small>
+					</section>
+					<section data-background="css/images/base.png">
+						<h2>Our development process</h2>
+						<ul>
+							<li>Both in D7 and in D8 in our CI process, we install the whole project on every deployment.</li>
+							<li class="fragment">For that reason, we can't back up in a DB for content.</li>
+							<li class="fragment">But we need content for testing and QA</li>
+						</ul>
+					</section>
+					<section data-background="css/images/base.png">
+						<h2>Installed site with no content</h2>
+						<img src="images/site-without-content.png" />
+					</section>
+					<section data-background="css/images/base.png">
+						<h2>Installed site with content</h2>
+						<img src="images/site-with-content.png" />
+					</section>
+				</section>
+				<section>
+					<section class="has-dark-background section-slide" data-background="css/images/section.png" >
+						<h2>The requirements</h2>
+						<small>Easy to use, easy to maintain</small>
+					</section>
+					<section data-background="css/images/base.png">
+						<h2>Easy to use</h2>
+						<ul>
+							<li>Developer oriented solution</li>
+							<li>Use of Migrate API as our base</li>
+							<li class="fragment">Easy to create content<br/>
+							<code>drush migrate-import &lt;content&gt;</code></li>
+							<li class="fragment">Easy to remove content<br/>
+							<code>drush migrate-rollback &lt;content&gt;</code></li>
+						</ul>
+					</section>
+					<section data-background="css/images/base.png">
+						<h2>Easy to maintain</h2>
+						<ul>
+							<li>Plain text files for content (CSV and YAML atm)</li>
+							<li>A new use case for a content is a new line in our text file</li>
+							<li>New content for a new entity is a new file</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section class="has-dark-background section-slide" data-background="css/images/section.png" >
+						<h2>Our module</h2>
+						<small>Migrate default content</small>
+					</section>
+					<section data-background="css/images/base.png">
+						<h2>History - Past</h2>
+						<ul>
+							<li>On D7:
+								<ul>
+									<li>Bunch of YAML files for entity and field definitions</li>
+									<li>One CSV file for every YAML entity definition</li>
+									<li>Integration with:
+										<ul>
+											<li>Node, Comment, Menu, User</li>
+											<li>Organic Groups</li>
+											<li>Field Collection</li>
+											<li>EntityReference</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section data-background="css/images/base.png">
+						<h2>History - Present</h2>
+						<ul>
+							<li>On D8:
+								<ul>
+									<li>Entity definitions are no longer necessary</li>
+									<li>Integration with <em>all</em> entities</li>
+									<li>Multilingual support</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section data-background="css/images/base.png">
+						<h2>Architecture</h2>
+						<ul>
+							<li>Based on Migrate API</li>
+							<li>Data source files in a folder out of docroot <strong>(recommended)</strong></li>
+							<li>Attachments in <code>/files</code> folder</li>
+							<li>Auto discovery fields for entities based on labels</li>
+							<li><code>entity.bundle.yml</code></li>
+						</ul>
+					</section>
 				</section>
 
-				<section data-background="css/images/base.png">
-					<h2>SLIDE TITLE</h2>
-					<p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nulla vitae elit libero, a pharetra augue.</p>
-
+				<section>
+					<section class="has-dark-background section-slide" data-background="css/images/section.png" >
+						<h2>Examples</h2>
+						<small>Show me the code!</small>
+					</section>
+					<section data-background="css/images/base.png">
+						<h2>Simple example</h2>
+						<p><code>node.page.yml</code></p>
+						<pre><code class="yam">-
+  title: Lorem ipsum
+  uid: editor_test
+  body:
+    value: "<p>And this is all the lorem ipsum dolor text.</p>"
+    summary: This is a summary
+    format: basic_html
+  field_attached_documents:
+    - image1.png
+    - doc2.pdf
+  status: 1</code></pre>
+					</section>
+					<section data-background="css/images/base.png">
+						<h2>Entity reference</h2>
+						<p><code>node.article.yml</code></p>
+						<pre><code class="yam">-
+  title: This is an entity reference example
+  uid: editor_test
+  field_related:
+    - Lorem ipsum
+    - Another example
+  field_keywords:
+    - news
+    - sports
+  status: 1</code></pre>
+					</section>
+					<section data-background="css/images/base.png">
+						<h2>Multilingual example</h2>
+						<p><code>node.page.ca.yml</code></p>
+						<pre><code class="yam">-
+  title: Lorem ipsum CA text
+  body:
+    value: "<p>And this is all the catalan content lorem ipsum dolor text.</p>"
+    summary: This is our CA summary
+    format: basic_html
+  translation_origin: Lorem ipsum</code></pre>
+					</section>
 				</section>
 
-				<section class="has-dark-background section-slide" data-background="css/images/section.png" >
-					<h2>THIS IS A SECTION OR QUOTE</h2>
-					<small>- SAID BY SOMEONE</small>
+				<section>
+					<section class="has-dark-background section-slide" data-background="css/images/section.png" >
+						<h2>Future</h2>
+						<small>Show me the roadmap</small>
+					</section>
+					<section data-background="css/images/base.png">
+						<h2>Roadmap</h2>
+						<ul>
+							<li>Lightweight core</li>
+							<li>JSON data source</li>
+							<li>Paragraph integration</li>
+							<li>UI</li>
+						</ul>
+					</section>
 				</section>
 
 				<!-- Please consider keeping this slide since DrupalDevDays is possible thanks to sponsors. -->
